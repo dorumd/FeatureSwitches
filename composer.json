@@ -1,0 +1,30 @@
+{
+    "name": "dorumd/feature-switches",
+    "description": "Feature Switches Component",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dorel Mardari",
+            "email": "mardari.dorua@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dorumd\\FeatureSwitches\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dorumd\\FeatureSwitches\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "symfony/yaml": "^5.1",
+        "symfony/config": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+    }
+}

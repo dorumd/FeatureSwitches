@@ -1,0 +1,5 @@
+feature_switches:
+  APP_TEST_1:
+     enabled: true
+  APP_TEST_2:
+     enabled: false
