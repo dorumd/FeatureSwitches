@@ -27,9 +27,9 @@ use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches;
 use Dorumd\FeatureSwitches\Infrastructure\FileFeatureSwitchesStorage;
 
 $configPath = __DIR__ . '/config/feature-switches.yaml';
-$this->featureSwitchesStorage = new FileFeatureSwitchesStorage($configPath);
+$featureSwitchesStorage = new FileFeatureSwitchesStorage($configPath);
 
-$featureSwitches = new BasicFeatureSwitches($this->featureSwitchesStorage);
+$featureSwitches = new BasicFeatureSwitches($featureSwitchesStorage);
 
 $featureSwitches->featureIsEnabled('SEND_MERCHANT_NOTIFICATIONS');
 $featureSwitches->featureIsEnabled('SEND_ORDER_EMAILS');
