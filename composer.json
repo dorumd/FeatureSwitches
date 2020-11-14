@@ -25,6 +25,11 @@
         "symfony/config": "^5.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "symplify/easy-coding-standard": "^8.3"
+    },
+    "scripts": {
+        "analyse": "./vendor/bin/ecs check src/",
+        "fix": "./vendor/bin/ecs check src/ --fix"
     }
 }
