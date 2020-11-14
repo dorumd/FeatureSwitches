@@ -7,4 +7,4 @@ build:
 	docker run feature-switches:latest composer run analyse
 
 fix-code-format:
-	docker run -v $$(pwd)/src:/FeatureSwitches/src feature-switches:latest composer run fix
+	docker run -v $$(pwd)/src:/FeatureSwitches/src -v $$(pwd)/tests:/FeatureSwitches/tests feature-switches:latest composer run fix

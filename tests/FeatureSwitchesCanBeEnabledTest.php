@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Dorumd\FeatureSwitches\Tests;
 
 use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches;
-use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitches;
+use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 use Dorumd\FeatureSwitches\Infrastructure\InMemoryFeatureSwitchesStorage;
 use PHPUnit\Framework\TestCase;
 

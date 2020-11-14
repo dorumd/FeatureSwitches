@@ -40,10 +40,8 @@ $featureSwitches->featureIsEnabled('SEND_ORDER_EMAILS');
 *Dependencies: Docker*
 
 ```bash
-# Build the docker image with all deps.
+# Build the docker image with all deps., run tests and validate code format
 make build
-# Run the tests and code style checker
-make validate
 ```
 
 To fix code formatting errors:

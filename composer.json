@@ -29,7 +29,7 @@
         "symplify/easy-coding-standard": "^8.3"
     },
     "scripts": {
-        "analyse": "./vendor/bin/ecs check src/",
-        "fix": "./vendor/bin/ecs check src/ --fix"
+        "analyse": "./vendor/bin/ecs check src/ tests/",
+        "fix": "./vendor/bin/ecs check src/ tests/ --fix"
     }
 }
