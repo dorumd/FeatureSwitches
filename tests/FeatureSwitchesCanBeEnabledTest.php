@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dorumd\FeatureSwitches\Tests;
 
+use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitch;
 use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitches;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
@@ -26,8 +27,8 @@ class FeatureSwitchesCanBeEnabledTest extends TestCase
     protected function setUp(): void
     {
         $this->featureSwitchesStorage = new InMemoryFeatureSwitchesStorage();
-        $this->featureSwitchesStorage->store('TEST-1', true);
-        $this->featureSwitchesStorage->store('TEST-2', false);
+        $this->featureSwitchesStorage->store(new BasicFeatureSwitch('TEST-1', true));
+        $this->featureSwitchesStorage->store(new BasicFeatureSwitch('TEST-2', false));
 
         $this->basicFeatureSwitches = new BasicFeatureSwitches($this->featureSwitchesStorage);
     }

@@ -4,26 +4,34 @@ declare(strict_types=1);
 
 namespace Dorumd\FeatureSwitches\Infrastructure;
 
+use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitch;
+use Dorumd\FeatureSwitches\Domain\FeatureSwitch;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
 class FileFeatureSwitchesStorage implements FeatureSwitchesStorage
 {
+    /** @var array<FeatureSwitch> */
     private array $data;
 
     public function __construct(string $pathToConfigurationFile)
     {
         $this->data = [];
 
-        foreach ($this->processFeatureSwitchesConfiguration($pathToConfigurationFile) as $name => $config) {
-            $this->data[$name] = $config['enabled'];
+        foreach ($this->processFeatureSwitchesConfiguration($pathToConfigurationFile) as $code => $config) {
+            $this->data[$code] = new BasicFeatureSwitch($code, $config['enabled']);
         }
     }
 
-    public function findFeatureSwitchEnabled(string $name): bool
+    public function findFeatureSwitchEnabled(string $code): bool
     {
-        return $this->data[$name] ?? false;
+        $featureSwitch = $this->data[$code];
+        if (!$featureSwitch) {
+            return false;
+        }
+
+        return $featureSwitch->isEnabled();
     }
 
     private function processFeatureSwitchesConfiguration(string $pathToConfigurationFile)

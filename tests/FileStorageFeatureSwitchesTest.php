@@ -18,10 +18,10 @@ use PHPUnit\Framework\TestCase;
  */
 class FileStorageFeatureSwitchesTest extends TestCase
 {
-    /** @var FeatureSwitchesStorage */
+    /** @var null|FeatureSwitchesStorage */
     private ?FeatureSwitchesStorage $featureSwitchesStorage;
 
-    /** @var FeatureSwitches */
+    /** @var null|FeatureSwitches */
     private ?FeatureSwitches $basicFeatureSwitches;
 
     protected function setUp(): void

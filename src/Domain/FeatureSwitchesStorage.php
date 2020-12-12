@@ -6,5 +6,5 @@ namespace Dorumd\FeatureSwitches\Domain;
 
 interface FeatureSwitchesStorage
 {
-    public function findFeatureSwitchEnabled(string $name): bool;
+    public function findFeatureSwitchEnabled(string $code): bool;
 }

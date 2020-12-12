@@ -22,6 +22,7 @@ class FeatureSwitchesFileConfiguration implements ConfigurationInterface
             ->useAttributeAsKey('name')
             ->arrayPrototype()
                 ->children()
+                    ->scalarNode('type')->defaultValue('basic')->end()
                     ->booleanNode('enabled')->end()
                 ->end()
             ->end();
