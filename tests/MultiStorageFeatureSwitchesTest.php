@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace Dorumd\FeatureSwitches\Tests;
 
 use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitch;
+use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitches;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
-use Dorumd\FeatureSwitches\Domain\MultiStorageFeatureSwitches;
 use Dorumd\FeatureSwitches\Domain\PercentageSplitFeatureSwitch;
+use Dorumd\FeatureSwitches\Infrastructure\CompositeStorage;
 use Dorumd\FeatureSwitches\Infrastructure\FileFeatureSwitchesStorage;
 use Dorumd\FeatureSwitches\Infrastructure\InMemoryFeatureSwitchesStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers MultiStorageFeatureSwitches
+ * @covers CompositeStorage
  */
 class MultiStorageFeatureSwitchesTest extends TestCase
 {
@@ -42,9 +43,18 @@ class MultiStorageFeatureSwitchesTest extends TestCase
             new PercentageSplitFeatureSwitch('SPLIT_TEST_3', false, ['percentage' => 50])
         );
 
-        $this->multiStorageFeatureSwitches = new MultiStorageFeatureSwitches(
-            [$this->fallbackStorage, $this->primaryStorage]
+        $this->multiStorageFeatureSwitches = new BasicFeatureSwitches(
+            new CompositeStorage(
+                [$this->fallbackStorage, $this->primaryStorage]
+            )
         );
+    }
+
+    public function tearDown(): void
+    {
+        $this->multiStorageFeatureSwitches = null;
+        $this->fallbackStorage = null;
+        $this->primaryStorage = null;
     }
 
     public function testIsEnabledOverridden(): void

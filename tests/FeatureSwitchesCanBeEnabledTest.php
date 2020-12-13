@@ -13,16 +13,14 @@ use Dorumd\FeatureSwitches\Infrastructure\InMemoryFeatureSwitchesStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class FeatureSwitchesCanBeEnabledTest
- * @package Dorumd\FeatureSwitches\Tests
  * @covers \Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches
  */
 class FeatureSwitchesCanBeEnabledTest extends TestCase
 {
-    /** @var null|FeatureSwitchesStorage */
+    /** @var FeatureSwitchesStorage|null */
     private ?FeatureSwitchesStorage $featureSwitchesStorage;
 
-    /** @var null|FeatureSwitches */
+    /** @var FeatureSwitches|null */
     private ?FeatureSwitches $basicFeatureSwitches;
 
     protected function setUp(): void

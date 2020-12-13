@@ -11,17 +11,15 @@ use Dorumd\FeatureSwitches\Infrastructure\FileFeatureSwitchesStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class FeatureSwitchesCanBeEnabledTest
- * @package Dorumd\FeatureSwitches\Tests
  * @covers \Dorumd\FeatureSwitches\Domain\BasicFeatureSwitches
  * @covers \Dorumd\FeatureSwitches\Infrastructure\FileFeatureSwitchesStorage
  */
 class FileStorageFeatureSwitchesTest extends TestCase
 {
-    /** @var null|FeatureSwitchesStorage */
+    /** @var FeatureSwitchesStorage|null */
     private ?FeatureSwitchesStorage $featureSwitchesStorage;
 
-    /** @var null|FeatureSwitches */
+    /** @var FeatureSwitches|null */
     private ?FeatureSwitches $basicFeatureSwitches;
 
     protected function setUp(): void
