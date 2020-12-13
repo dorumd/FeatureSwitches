@@ -66,6 +66,8 @@ echo $featureSwitches->featureIsEnabled('SEND_ORDER_EMAILS');
     ```
     Note: The accuracy of its percentage split is limited by randomness of php `rand(1, 100)`. With smaller samples(N < 1000), higher deviation is expected. 
 
+* More to come soon...
+
 ## Storage
 
 This library comes with 3 storage mechanisms embedded:
