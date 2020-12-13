@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Dorumd\FeatureSwitches\Infrastructure;
 
+use Dorumd\FeatureSwitches\Domain\FeatureSwitch;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 
 class InMemoryFeatureSwitchesStorage implements FeatureSwitchesStorage
 {
+    /** @var array<FeatureSwitch> */
     private array $data;
 
     public function __construct()
@@ -15,18 +17,13 @@ class InMemoryFeatureSwitchesStorage implements FeatureSwitchesStorage
         $this->data = [];
     }
 
-    public function findFeatureSwitchEnabled(string $name): bool
+    public function findFeatureSwitch(string $code): ?FeatureSwitch
     {
-        return $this->data[$name] ?? false;
+        return $this->data[$code] ?? null;
     }
 
-    /**
-     * Not part of the domain interface yet, since there is no use-case outside of tests yet.
-     * @param string $name
-     * @param bool $enabled
-     */
-    public function store(string $name, bool $enabled): void
+    public function store(FeatureSwitch $featureSwitch): void
     {
-        $this->data[$name] = $enabled;
+        $this->data[$featureSwitch->getCode()] = $featureSwitch;
     }
 }

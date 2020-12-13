@@ -15,6 +15,11 @@ class BasicFeatureSwitches implements FeatureSwitches
 
     public function featureIsEnabled(string $featureName): bool
     {
-        return $this->storage->findFeatureSwitchEnabled($featureName);
+        $featureSwitch = $this->storage->findFeatureSwitch($featureName);
+        if (!$featureSwitch) {
+            return false;
+        }
+
+        return $featureSwitch->isEnabled();
     }
 }

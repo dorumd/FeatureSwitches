@@ -3,3 +3,13 @@ feature_switches:
      enabled: true
   APP_TEST_2:
      enabled: false
+  SPLIT_TEST_1:
+    enabled: true
+    type: \Dorumd\FeatureSwitches\Domain\PercentageSplitFeatureSwitch
+    configuration:
+      percentage: 50
+  SPLIT_TEST_2:
+    enabled: false
+    type: \Dorumd\FeatureSwitches\Domain\PercentageSplitFeatureSwitch
+    configuration:
+      percentage: 30
