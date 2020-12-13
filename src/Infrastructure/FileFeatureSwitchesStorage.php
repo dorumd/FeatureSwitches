@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dorumd\FeatureSwitches\Infrastructure;
 
-use Dorumd\FeatureSwitches\Domain\BasicFeatureSwitch;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitch;
 use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 use Symfony\Component\Config\Definition\Processor;
@@ -20,7 +19,7 @@ class FileFeatureSwitchesStorage implements FeatureSwitchesStorage
         $this->data = [];
 
         foreach ($this->processFeatureSwitchesConfiguration($pathToConfigurationFile) as $code => $config) {
-            $this->data[$code] = new BasicFeatureSwitch($code, $config['enabled']);
+            $this->data[$code] = new $config['type']($code, $config['enabled'], $config['configuration'] ?? []);
         }
     }
 

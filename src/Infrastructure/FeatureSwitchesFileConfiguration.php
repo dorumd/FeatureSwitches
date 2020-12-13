@@ -22,8 +22,9 @@ class FeatureSwitchesFileConfiguration implements ConfigurationInterface
             ->useAttributeAsKey('name')
             ->arrayPrototype()
                 ->children()
-                    ->scalarNode('type')->defaultValue('basic')->end()
+                    ->scalarNode('type')->defaultValue('\Dorumd\FeatureSwitches\Domain\BasicFeatureSwitch')->end()
                     ->booleanNode('enabled')->end()
+                    ->variableNode('configuration')
                 ->end()
             ->end();
 

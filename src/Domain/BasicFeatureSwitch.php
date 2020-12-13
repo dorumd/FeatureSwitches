@@ -9,15 +9,12 @@ class BasicFeatureSwitch implements FeatureSwitch
     private string $code;
     private bool $enabled;
 
-    public function __construct(string $code, bool $enabled)
+    public function __construct(string $code, bool $enabled, array $configuration = [])
     {
+        unset($configuration);
+
         $this->code = $code;
         $this->enabled = $enabled;
-    }
-
-    public function getType(): string
-    {
-        return 'basic';
     }
 
     public function getCode(): string

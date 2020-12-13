@@ -46,10 +46,59 @@ class FileStorageFeatureSwitchesTest extends TestCase
     public function testIsDisabled(): void
     {
         $this->assertFalse($this->basicFeatureSwitches->featureIsEnabled('APP_TEST_2'));
+        $this->assertFalse($this->basicFeatureSwitches->featureIsEnabled('TEST_SPLIT_2'));
     }
 
     public function testMissingFeature(): void
     {
         $this->assertFalse($this->basicFeatureSwitches->featureIsEnabled('MISSING'));
+    }
+
+
+    /**
+     * @dataProvider percentageSplitProvider
+     */
+    public function testPercentageSplit(
+        int $retries,
+        int $sampleCount,
+        int $expectedLowestCountOfEnabled,
+        int $expectedHighestCountOfEnabled
+    ): void {
+        for ($i = 0; $i < $retries; $i++) {
+            $results = [];
+
+            for ($j = 0; $j < $sampleCount; $j++) {
+                $results[] = $this->basicFeatureSwitches->featureIsEnabled('SPLIT_TEST_1');
+            }
+
+            $enabledResultsCount = count(array_filter($results));
+
+            $this->assertTrue($enabledResultsCount > $expectedLowestCountOfEnabled, "{$enabledResultsCount}");
+            $this->assertTrue($enabledResultsCount < $expectedHighestCountOfEnabled, "{$enabledResultsCount}");
+        }
+    }
+
+    public function percentageSplitProvider(): array
+    {
+        return [
+            '3000 attempts' => [
+                'retries' => 100,
+                'sampleCount' => 3000,
+                'expectedLowestCountOfEnabled' => 1350,
+                'expectedHighestCountOfEnabled' => 1650,
+            ],
+            '500 attempts' => [
+                'retries' => 100,
+                'sampleCount' => 500,
+                'expectedLowestCountOfEnabled' => 200,
+                'expectedHighestCountOfEnabled' => 300,
+            ],
+            '50000 attempts' => [
+                'retries' => 20,
+                'sampleCount' => 50000,
+                'expectedLowestCountOfEnabled' => 24000,
+                'expectedHighestCountOfEnabled' => 26000,
+            ],
+        ];
     }
 }
