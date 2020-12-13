@@ -7,9 +7,7 @@ namespace Dorumd\FeatureSwitches\Domain;
 class PercentageSplitFeatureSwitch implements FeatureSwitch
 {
     private string $code;
-
     private bool $enabled;
-
     private int $percentage;
 
     public function __construct(string $code, bool $enabled, array $configuration)

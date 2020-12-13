@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dorumd\FeatureSwitches\Domain;
+namespace Dorumd\FeatureSwitches\Infrastructure;
 
+use Dorumd\FeatureSwitches\Domain\FeatureSwitch;
+use Dorumd\FeatureSwitches\Domain\FeatureSwitchesStorage;
 use Webmozart\Assert\Assert;
 
-class MultiStorageFeatureSwitches implements FeatureSwitches
+class CompositeStorage implements FeatureSwitchesStorage
 {
     /** @var array<FeatureSwitchesStorage> */
     private array $storages;
@@ -23,18 +25,19 @@ class MultiStorageFeatureSwitches implements FeatureSwitches
         $this->storages = $storages;
     }
 
-    public function featureIsEnabled(string $featureName): bool
+    public function findFeatureSwitch(string $code): ?FeatureSwitch
     {
         $featureSwitch = null;
         foreach ($this->storages as $storage) {
-            $featureSwitch = $storage->findFeatureSwitch($featureName);
+            $foundFeatureSwitch = $storage->findFeatureSwitch($code);
+            if (!$foundFeatureSwitch) {
+                continue;
+            }
+
+            $featureSwitch = $foundFeatureSwitch;
         }
 
-        if (!$featureSwitch) {
-            return false;
-        }
-
-        return $featureSwitch->isEnabled();
+        return $featureSwitch;
     }
 
     private function ensureValidStorage($storage)
