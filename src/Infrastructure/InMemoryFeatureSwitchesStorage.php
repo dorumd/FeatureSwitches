@@ -17,14 +17,9 @@ class InMemoryFeatureSwitchesStorage implements FeatureSwitchesStorage
         $this->data = [];
     }
 
-    public function findFeatureSwitchEnabled(string $code): bool
+    public function findFeatureSwitch(string $code): ?FeatureSwitch
     {
-        $featureSwitch = $this->data[$code];
-        if (!$featureSwitch) {
-            return false;
-        }
-
-        return $featureSwitch->isEnabled();
+        return $this->data[$code] ?? null;
     }
 
     public function store(FeatureSwitch $featureSwitch): void

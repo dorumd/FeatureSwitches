@@ -23,14 +23,9 @@ class FileFeatureSwitchesStorage implements FeatureSwitchesStorage
         }
     }
 
-    public function findFeatureSwitchEnabled(string $code): bool
+    public function findFeatureSwitch(string $code): ?FeatureSwitch
     {
-        $featureSwitch = $this->data[$code];
-        if (!$featureSwitch) {
-            return false;
-        }
-
-        return $featureSwitch->isEnabled();
+        return $this->data[$code] ?? null;
     }
 
     private function processFeatureSwitchesConfiguration(string $pathToConfigurationFile)
